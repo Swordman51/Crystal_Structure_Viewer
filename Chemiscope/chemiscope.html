@@ -1,7 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Chemiscope basic example</title>
 
-<script type = "text/javascript" src="chemiscope.min.js"></script>  
-</head>  
-<body>  
-<p>Click the following button to see the function in action</p>  
-<input type = "button" onclick = "Chemiscope.DefaultVisualizer.load(config, dataset)" value = "Display">  
-</body>  
+        <!-- Load all dependencies -->
+        <!-- jquery -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- Chemiscope code and default viewer code -->
+        <script defer type = "text/javascript" src="../node_modules/chemiscope/dist/chemiscope.min.js"></script>  
+        <!-- defer means that the chemiscope viewer will only show up after the page has been parsed and loaded (parsed means the code has been broken down
+            and acted upon)-->
+
+       
+
+        <!-- The Head section is where all the info about your webpage goes and other supporting scripts. It includes meta data and it is also
+        where you define your javascript scripts-->
+    </head>  
+<body>
+        <!-- Create basic DOM element for the different panels to live in -->
+        <div id="meta"></div>
+        <div id="map"></div>
+        <div id="structure" style="width: 400px; height: 400px"></div>
+        <div id="info"></div>
+        <!-- We appreciate a citation back to the main chemiscope website -->
+        <span style="font-size: x-small; float: right"> powered by <a href="https://chemiscope.org">chemiscope</a> </span>
+    </body>
+ <script type="text/javascript">
+        // show errors in the webpage
+        window.onerror = (error) => {
+            document.body.insertAdjacentHTML('beforebegin', `<div style="margin: auto; color: red;">ERROR: ${error}</div>`);
+        };
+    </script>
+
+    <script type="text/javascript">
+        // load data from anywhere
+      /*  const dataset = {
+            meta: // to be loaded
+            structures: // to be loaded
+            properties: // to be loaded
+            environments: // to be loaded (optional)
+        };
+*/
+        const config = {
+            // id of the different elements
+            map: "map",
+            meta: "meta",
+            info: "info",
+            structure: "structure",
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // once all javascript have been loaded, we can setup the
+            // DefaultVisualizer instance.
+            Chemiscope.DefaultVisualizer.load(config, dataset);
+        });
+    </script>
+</html>
